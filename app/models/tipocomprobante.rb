@@ -1,0 +1,2 @@
+class Tipocomprobante < ApplicationRecord
+end

@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  fecha: 2023-01-14
+  tiporegistro: one
+  concepto: one
+  subconcepto: one
+  tipocomprobante: one
+  nrocomprobante: MyString
+  nroordenpago: MyString
+  proveedor: 
+  formapago: one
+  importe: 
+  observacion: MyString
+  activo: false
+
+two:
+  fecha: 2023-01-14
+  tiporegistro: two
+  concepto: two
+  subconcepto: two
+  tipocomprobante: two
+  nrocomprobante: MyString
+  nroordenpago: MyString
+  proveedor: 
+  formapago: two
+  importe: 
+  observacion: MyString
+  activo: false
