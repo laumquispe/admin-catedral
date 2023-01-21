@@ -18,4 +18,5 @@ Rails.application.routes.draw do
   get '/getconceptobytiporegistro', to: 'conceptos#getconceptobytiporegistro'
   get '/getsubconceptobyconcepto', to: 'subconceptos#getsubconceptobyconcepto'
   get '/getregistroscajabyRangofecha', to: 'cajagenerales#getregistroscajabyRangofecha'
+  put '/updateregistrocanceled', to:'cajagenerales#updateregistrocanceled'
 end

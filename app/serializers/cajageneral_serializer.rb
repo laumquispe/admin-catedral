@@ -1,6 +1,6 @@
 class CajageneralSerializer < ActiveModel::Serializer
   attributes :id, :fecha, :nrocomprobante, :nroordenpago, :importe, :observacion, :activo, :tiporegistro_id, :createdregistro,:tipocomprobante_id,
-  :proveedor_id
+  :proveedor_id, :formapago_id
   :updatedregistro
   has_one :tiporegistro
   has_one :concepto

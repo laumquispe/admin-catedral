@@ -68,6 +68,16 @@ class CajageneralesController < ApplicationController
     render json: @cajagenerales
   end 
 
+  def updateregistrocanceled  
+    cajageneral = Cajageneral.find(params[:id])
+    if cajageneral
+      @cajageneral = cajageneral.update(activo: false,canceled_by_id:params[:canceled_by_id], canceled_at:params[:canceled_at])
+      render json: @cajageneral
+    else
+      render json: @cajageneral.errors, status: :unprocessable_entity
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_cajageneral
