@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :templates
   resources :ctacteproveedores
   resources :cajagenerales
   resources :subconceptos

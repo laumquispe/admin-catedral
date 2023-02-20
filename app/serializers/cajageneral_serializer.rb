@@ -26,7 +26,7 @@ class CajageneralSerializer < ActiveModel::Serializer
   end
 
   attribute :importe do 
-    object.importe.to_i 
+    object.importe.to_f
   end 
 
   

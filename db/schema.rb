@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_16_211923) do
+ActiveRecord::Schema.define(version: 2023_02_19_155653) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -121,6 +121,13 @@ ActiveRecord::Schema.define(version: 2023_01_16_211923) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["permiso_id"], name: "index_subpermisos_on_permiso_id"
+  end
+
+  create_table "templates", force: :cascade do |t|
+    t.string "codigo", limit: 50
+    t.string "html"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "tipocomprobantes", force: :cascade do |t|

@@ -45,21 +45,21 @@ class CajageneralesController < ApplicationController
     subconcepto_id = params[:subconcepto_id]
     formapago_id = params[:formapago_id]
     if concepto_id != "null" && subconcepto_id == "null" && formapago_id == "null"
-        @cajagenerales = Cajageneral.where("DATE(fecha) >= DATE(?)",fechadesde).where("DATE(fecha) <= DATE(?)", fechahasta).where(activo:true,concepto_id:concepto_id).order('cajagenerales.id DESC')  
+        @cajagenerales = Cajageneral.where("DATE(fecha) >= DATE(?)",fechadesde).where("DATE(fecha) <= DATE(?)", fechahasta).where(activo:true,concepto_id:concepto_id).order('cajagenerales.id ASC')  
     else
         if concepto_id != "null" && subconcepto_id != "null" && formapago_id == "null"
-           @cajagenerales = Cajageneral.where("DATE(fecha) >= DATE(?)",fechadesde).where("DATE(fecha) <= DATE(?)", fechahasta).where(activo:true,concepto_id:concepto_id,subconcepto_id:subconcepto_id).order('cajagenerales.id DESC') 
+           @cajagenerales = Cajageneral.where("DATE(fecha) >= DATE(?)",fechadesde).where("DATE(fecha) <= DATE(?)", fechahasta).where(activo:true,concepto_id:concepto_id,subconcepto_id:subconcepto_id).order('cajagenerales.id ASC') 
         else
           if concepto_id != "null" && subconcepto_id != "null" && formapago_id != "null"
-            @cajagenerales = Cajageneral.where("DATE(fecha) >= DATE(?)",fechadesde).where("DATE(fecha) <= DATE(?)", fechahasta).where(activo:true,concepto_id:concepto_id,subconcepto_id:subconcepto_id,formapago_id:formapago_id).order('cajagenerales.id DESC')  
+            @cajagenerales = Cajageneral.where("DATE(fecha) >= DATE(?)",fechadesde).where("DATE(fecha) <= DATE(?)", fechahasta).where(activo:true,concepto_id:concepto_id,subconcepto_id:subconcepto_id,formapago_id:formapago_id).order('cajagenerales.id ASC')  
           else
             if concepto_id == "null" && subconcepto_id == "null" && formapago_id != "null"
-                @cajagenerales = Cajageneral.where("DATE(fecha) >= DATE(?)",fechadesde).where("DATE(fecha) <= DATE(?)", fechahasta).where(activo:true,formapago_id:formapago_id).order('cajagenerales.id DESC')
+                @cajagenerales = Cajageneral.where("DATE(fecha) >= DATE(?)",fechadesde).where("DATE(fecha) <= DATE(?)", fechahasta).where(activo:true,formapago_id:formapago_id).order('cajagenerales.id ASC')
             else
                 if concepto_id != "null" && subconcepto_id == "null" && formapago_id != "null"
-                 @cajagenerales = Cajageneral.where("DATE(fecha) >= DATE(?)",fechadesde).where("DATE(fecha) <= DATE(?)", fechahasta).where(activo:true,concepto_id:concepto_id,formapago_id:formapago_id).order('cajagenerales.id DESC') 
+                 @cajagenerales = Cajageneral.where("DATE(fecha) >= DATE(?)",fechadesde).where("DATE(fecha) <= DATE(?)", fechahasta).where(activo:true,concepto_id:concepto_id,formapago_id:formapago_id).order('cajagenerales.id ASC') 
                 else
-                 @cajagenerales = Cajageneral.where("DATE(fecha) >= DATE(?)",fechadesde).where("DATE(fecha) <= DATE(?)", fechahasta).where(activo:true).order('cajagenerales.id DESC')                      
+                 @cajagenerales = Cajageneral.where("DATE(fecha) >= DATE(?)",fechadesde).where("DATE(fecha) <= DATE(?)", fechahasta).where(activo:true).order('cajagenerales.id ASC')                      
                 end 
             end 
           end 
