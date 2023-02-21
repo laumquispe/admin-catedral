@@ -78,6 +78,20 @@ class CajageneralesController < ApplicationController
     end
   end
 
+  def lastregistro      
+      @cajageneral = Cajageneral.where(activo: true).last
+      render json: @cajageneral   
+  end
+
+  def sumregistros      
+      registro = []
+      ingreso = Cajageneral.where(activo: true,tiporegistro_id:1).sum(:importe)
+      egreso = Cajageneral.where(activo: true,tiporegistro_id:2).sum(:importe)
+      neto = ingreso - egreso
+      registro.push({ingreso:ingreso,egreso:egreso, neto: neto})
+      render json: registro
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_cajageneral
@@ -86,6 +100,6 @@ class CajageneralesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def cajageneral_params
-      params.require(:cajageneral).permit(:fecha, :tiporegistro_id, :concepto_id, :subconcepto_id, :tipocomprobante_id, :nrocomprobante, :nroordenpago, :proveedor_id, :formapago_id, :importe, :observacion, :activo, :created_by_id, :updated_by_id)
+      params.require(:cajageneral).permit(:fecha, :tiporegistro_id, :concepto_id, :subconcepto_id, :tipocomprobante_id, :nrocomprobante, :nroordenpago, :proveedor_id, :formapago_id, :importe, :observacion, :activo, :created_by_id, :updated_by_id, :saldo)
     end
 end

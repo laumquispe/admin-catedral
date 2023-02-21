@@ -20,4 +20,7 @@ Rails.application.routes.draw do
   get '/getsubconceptobyconcepto', to: 'subconceptos#getsubconceptobyconcepto'
   get '/getregistroscajabyRangofecha', to: 'cajagenerales#getregistroscajabyRangofecha'
   put '/updateregistrocanceled', to:'cajagenerales#updateregistrocanceled'
+  get '/lastregistro', to:'cajagenerales#lastregistro'
+  get '/sumregistros', to:'cajagenerales#sumregistros'
+  
 end
