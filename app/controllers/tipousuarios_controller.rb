@@ -10,7 +10,7 @@ class TipousuariosController < ApplicationController
 
   # GET /tipousuarios/1
   def show
-    render json: @tipousuario
+    render json: @tipousuario, serializer: TipousuarioSerializer, tipousuarioid:params[:id]
   end
 
   # POST /tipousuarios

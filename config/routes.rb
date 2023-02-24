@@ -22,5 +22,6 @@ Rails.application.routes.draw do
   put '/updateregistrocanceled', to:'cajagenerales#updateregistrocanceled'
   get '/lastregistro', to:'cajagenerales#lastregistro'
   get '/sumregistros', to:'cajagenerales#sumregistros'
+  put '/updatebyconcepto', to: 'subconceptos#updatebyconcepto'
   
 end

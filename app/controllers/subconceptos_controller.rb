@@ -3,7 +3,7 @@ class SubconceptosController < ApplicationController
 
   # GET /subconceptos
   def index
-    @subconceptos = Subconcepto.all
+    @subconceptos = Subconcepto.where(concepto_id:params[:concepto_id])
 
     render json: @subconceptos
   end
@@ -33,13 +33,22 @@ class SubconceptosController < ApplicationController
     end
   end
 
+  def updatebyconcepto
+    subconcepto = Subconcepto.where(concepto_id:params[:concepto_id])
+    if @subconcepto = subconcepto.update(activo:params[:activo])
+      render json: @subconcepto
+    else
+      render json: @subconcepto.errors, status: :unprocessable_entity
+    end
+  end
+
   # DELETE /subconceptos/1
   def destroy
     @subconcepto.destroy
   end
 
   def getsubconceptobyconcepto
-    @subconceptos = Subconcepto.where(concepto_id:params[:concepto_id])
+    @subconceptos = Subconcepto.where(concepto_id:params[:concepto_id],activo:true)
     render json: @subconceptos
   end  
 

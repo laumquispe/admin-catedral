@@ -39,7 +39,7 @@ class ConceptosController < ApplicationController
   end
 
   def getconceptobytiporegistro
-    @conceptos = Concepto.where(tiporegistro_id:params[:tiporegistro_id])
+    @conceptos = Concepto.where(tiporegistro_id:params[:tiporegistro_id],activo:true)
 
     render json: @conceptos
   end
