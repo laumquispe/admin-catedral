@@ -15,5 +15,6 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
    inflect.irregular 'proveedor', 'proveedores' 
    inflect.irregular 'cajageneral', 'cajagenerales'
    inflect.irregular 'ctacteproveedor', 'ctacteproveedores'
+   inflect.irregular 'cajamensual', 'cajamensuales'
    
 end

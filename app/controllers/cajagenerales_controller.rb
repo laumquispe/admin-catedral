@@ -92,6 +92,22 @@ class CajageneralesController < ApplicationController
       render json: registro
   end
 
+  def getregistroscajabyrangomes # todavia no usado
+     cajamensual = []
+     fechahasta = Date.parse(params[:fechahasta]).strftime "%Y-%m"
+     ingreso = Cajageneral.where("to_char(cajagenerales.fecha, 'YYYY-MM') = ?",fechahasta).where(activo: true,tiporegistro_id:1).sum(:importe)
+     egreso = Cajageneral.where("to_char(cajagenerales.fecha, 'YYYY-MM') = ?",fechahasta).where(activo: true,tiporegistro_id:2).sum(:importe)
+     neto = ingreso - egreso
+     cajamensual.push({ingreso:ingreso,egreso:egreso, neto: neto})
+     render json: cajamensual
+  end  
+
+  def updateregistroscajabymes
+    registros = Cajageneral.where(id: params[:registroids])   
+    @registros = registros.update(registrocerrado: true, updated_by_id: params[:usuario_id])
+    render json: @registros
+  end  
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_cajageneral
@@ -100,6 +116,6 @@ class CajageneralesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def cajageneral_params
-      params.require(:cajageneral).permit(:fecha, :tiporegistro_id, :concepto_id, :subconcepto_id, :tipocomprobante_id, :nrocomprobante, :nroordenpago, :proveedor_id, :formapago_id, :importe, :observacion, :activo, :created_by_id, :updated_by_id, :saldo)
+      params.require(:cajageneral).permit(:fecha, :tiporegistro_id, :concepto_id, :subconcepto_id, :tipocomprobante_id, :nrocomprobante, :nroordenpago, :proveedor_id, :formapago_id, :importe, :observacion, :activo, :created_by_id, :updated_by_id, :saldo, :registrocerrado)
     end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_02_20_232820) do
+ActiveRecord::Schema.define(version: 2023_04_23_153836) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 2023_02_20_232820) do
     t.bigint "canceled_by_id"
     t.datetime "canceled_at"
     t.decimal "saldo"
+    t.boolean "registrocerrado", default: false
     t.index ["canceled_by_id"], name: "index_cajagenerales_on_canceled_by_id"
     t.index ["concepto_id"], name: "index_cajagenerales_on_concepto_id"
     t.index ["created_by_id"], name: "index_cajagenerales_on_created_by_id"
@@ -44,6 +45,20 @@ ActiveRecord::Schema.define(version: 2023_02_20_232820) do
     t.index ["tipocomprobante_id"], name: "index_cajagenerales_on_tipocomprobante_id"
     t.index ["tiporegistro_id"], name: "index_cajagenerales_on_tiporegistro_id"
     t.index ["updated_by_id"], name: "index_cajagenerales_on_updated_by_id"
+  end
+
+  create_table "cajamensuales", force: :cascade do |t|
+    t.string "periodo", limit: 10
+    t.decimal "saldoinicial"
+    t.decimal "ingreso"
+    t.decimal "egreso"
+    t.decimal "saldocierre"
+    t.bigint "created_by_id"
+    t.bigint "updated_by_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["created_by_id"], name: "index_cajamensuales_on_created_by_id"
+    t.index ["updated_by_id"], name: "index_cajamensuales_on_updated_by_id"
   end
 
   create_table "conceptos", force: :cascade do |t|
@@ -209,6 +224,8 @@ ActiveRecord::Schema.define(version: 2023_02_20_232820) do
   add_foreign_key "cajagenerales", "usuarios", column: "canceled_by_id"
   add_foreign_key "cajagenerales", "usuarios", column: "created_by_id"
   add_foreign_key "cajagenerales", "usuarios", column: "updated_by_id"
+  add_foreign_key "cajamensuales", "usuarios", column: "created_by_id"
+  add_foreign_key "cajamensuales", "usuarios", column: "updated_by_id"
   add_foreign_key "conceptos", "tiporegistros"
   add_foreign_key "ctacteproveedores", "proveedores"
   add_foreign_key "ctacteproveedores", "usuarios", column: "canceled_by_id"

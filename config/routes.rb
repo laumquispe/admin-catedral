@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :cajamensuales
   resources :templates
   resources :ctacteproveedores
   resources :cajagenerales
@@ -23,5 +24,9 @@ Rails.application.routes.draw do
   get '/lastregistro', to:'cajagenerales#lastregistro'
   get '/sumregistros', to:'cajagenerales#sumregistros'
   put '/updatebyconcepto', to: 'subconceptos#updatebyconcepto'
+  get '/getregistroscajabyrangomes', to:'cajagenerales#getregistroscajabyrangomes'
+  get '/lastcierremensual', to:'cajamensuales#lastcierremensual'
+  put '/updateregistroscajabymes', to: 'cajagenerales#updateregistroscajabymes'
+  get '/getcajamensualbyperiodo', to: 'cajamensuales#getcajamensualbyperiodo'
   
 end
