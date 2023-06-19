@@ -49,6 +49,13 @@ class CajamensualesController < ApplicationController
     render json: @cajamensual    
   end
 
+  def getcajamensualbyanio   
+    @cajamensual = Cajamensual.
+                 where('cajamensuales.periodo  ILIKE ?', "%#{params[:anio]}").                    
+                 order('cajamensuales.periodo ASC')              
+    render json: @cajamensual
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

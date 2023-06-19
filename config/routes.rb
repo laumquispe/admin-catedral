@@ -28,5 +28,8 @@ Rails.application.routes.draw do
   get '/lastcierremensual', to:'cajamensuales#lastcierremensual'
   put '/updateregistroscajabymes', to: 'cajagenerales#updateregistroscajabymes'
   get '/getcajamensualbyperiodo', to: 'cajamensuales#getcajamensualbyperiodo'
+  get '/getlastrecibointerno', to: 'cajagenerales#getlastrecibointerno'
+  get '/getcajamensualbyanio', to: 'cajamensuales#getcajamensualbyanio'
+  get '/agrupadosbysubconcepto', to: 'cajagenerales#agrupadosbysubconcepto'
   
 end

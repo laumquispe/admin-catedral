@@ -108,6 +108,25 @@ class CajageneralesController < ApplicationController
     render json: @registros
   end  
 
+  def getlastrecibointerno
+      @cajageneral = Cajageneral.where(tipocomprobante_id:params[:comprobante_id],activo: true).last
+      render json: @cajageneral   
+  end
+
+  def agrupadosbysubconcepto
+    anio = params[:anio]
+    @detalles = Cajageneral.select("cajagenerales.tiporegistro_id,cajagenerales.concepto_id,cajagenerales.subconcepto_id, sum(cajagenerales.importe) as suma").                     
+                            where("to_char(cajagenerales.fecha, 'YYYY') = ?",anio).
+                            where("cajagenerales.activo=?",true).
+                            where("cajagenerales.registrocerrado=?",true). 
+                            group("cajagenerales.tiporegistro_id").                               
+                            group("cajagenerales.concepto_id").
+                            group("cajagenerales.subconcepto_id").
+                            order("cajagenerales.concepto_id")                   
+    render json: @detalles, each_serializer: RegistrosagrupadosSerializer
+  end 
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_cajageneral
