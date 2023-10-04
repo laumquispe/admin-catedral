@@ -31,5 +31,6 @@ Rails.application.routes.draw do
   get '/getlastrecibointerno', to: 'cajagenerales#getlastrecibointerno'
   get '/getcajamensualbyanio', to: 'cajamensuales#getcajamensualbyanio'
   get '/agrupadosbysubconcepto', to: 'cajagenerales#agrupadosbysubconcepto'
+  get '/getregistrosbyperiodo', to: 'cajagenerales#getregistrosbyperiodo'
   
 end

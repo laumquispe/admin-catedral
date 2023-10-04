@@ -1,9 +1,16 @@
 class RegistrosagrupadosSerializer < ActiveModel::Serializer
-  attributes :tiporegistro_id,:concepto_id,:subconcepto_id,:concepto,:subconcepto,:suma
+  attributes :tiporegistro_id,:concepto_id,:subconcepto_id,:concepto,:subconcepto,:suma, :periodo
 
   attribute :suma do 
     object.suma.to_f
   end 
+
+  def periodo
+    if !instance_options[:periodo].nil?
+      return   instance_options[:periodo]
+    end
+    
+  end
 
 
   def subconcepto 

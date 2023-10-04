@@ -92,13 +92,13 @@ class CajageneralesController < ApplicationController
       render json: registro
   end
 
-  def getregistroscajabyrangomes # todavia no usado
+  def getregistroscajabyrangomes 
      cajamensual = []
-     fechahasta = Date.parse(params[:fechahasta]).strftime "%Y-%m"
+     fechahasta = Date.parse(params[:fecha]).strftime "%Y-%m"
      ingreso = Cajageneral.where("to_char(cajagenerales.fecha, 'YYYY-MM') = ?",fechahasta).where(activo: true,tiporegistro_id:1).sum(:importe)
      egreso = Cajageneral.where("to_char(cajagenerales.fecha, 'YYYY-MM') = ?",fechahasta).where(activo: true,tiporegistro_id:2).sum(:importe)
      neto = ingreso - egreso
-     cajamensual.push({ingreso:ingreso,egreso:egreso, neto: neto})
+     cajamensual.push({fecha:fechahasta, ingreso:ingreso,egreso:egreso, neto: neto})
      render json: cajamensual
   end  
 
@@ -124,6 +124,28 @@ class CajageneralesController < ApplicationController
                             group("cajagenerales.subconcepto_id").
                             order("cajagenerales.concepto_id")                   
     render json: @detalles, each_serializer: RegistrosagrupadosSerializer
+  end 
+
+
+  def getregistrosbyperiodo
+    periodo = Date.parse(params[:periodo]).strftime "%Y-%m"   
+    tiporegistro_id = params[:tiporegistro_id]
+    concepto_id = params[:concepto_id]
+    subconcepto_id = params[:subconcepto_id]   
+    if tiporegistro_id != "null" && concepto_id == "null" && subconcepto_id == "null"
+        @cajagenerales = Cajageneral.select("to_char(cajagenerales.fecha, 'YYYY-MM') as periodo,cajagenerales.tiporegistro_id,cajagenerales.concepto_id,cajagenerales.subconcepto_id, sum(cajagenerales.importe) as suma").                     
+                            where("to_char(cajagenerales.fecha, 'YYYY-MM') = ?",periodo).
+                            where("cajagenerales.tiporegistro_id = ?",tiporegistro_id).
+                            where("cajagenerales.activo=?",true).
+                            where("cajagenerales.registrocerrado=?",true). 
+                            group("periodo"). 
+                            group("cajagenerales.tiporegistro_id").                               
+                            group("cajagenerales.concepto_id").
+                            group("cajagenerales.subconcepto_id").
+                            order("cajagenerales.concepto_id")     
+        render json: @cajagenerales, each_serializer: RegistrosagrupadosSerializer,periodo:periodo
+    end  
+   
   end 
 
 
