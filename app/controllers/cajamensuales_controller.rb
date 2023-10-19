@@ -44,7 +44,7 @@ class CajamensualesController < ApplicationController
   end
 
   def getcajamensualbyperiodo
-    periodo = params[:periodo]      
+    periodo = params[:periodo]  
     @cajamensual = Cajamensual.where(periodo: periodo)                 
     render json: @cajamensual    
   end
@@ -54,6 +54,12 @@ class CajamensualesController < ApplicationController
                  where('cajamensuales.periodo  ILIKE ?', "%#{params[:anio]}").                    
                  order('cajamensuales.periodo ASC')              
     render json: @cajamensual
+  end
+
+  def getcajamensualbyperiodoant
+    periodo = params[:periodo]  
+    @cajamensual = Cajamensual.where(periodo: periodo)                 
+    render json: @cajamensual    
   end
 
 
